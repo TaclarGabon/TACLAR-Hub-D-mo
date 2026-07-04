@@ -34,7 +34,7 @@
     .errbox{background:#fff0f0;border-left:5px solid var(--red);border-radius:12px;padding:12px;margin:12px 0;color:#6f0013}
     .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
     .metric{background:white;border:1px solid var(--line);border-radius:16px;padding:14px}.label{font-size:12px;color:var(--muted)}.value{font-size:24px;font-weight:900;color:var(--teal-dark);margin-top:6px}
-    .actions{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.action{background:#eef7f8;border:1px solid var(--line);border-radius:16px;padding:15px;text-decoration:none;color:var(--text)}.action strong{display:block;color:var(--teal-dark);margin-bottom:6px}.action:hover{outline:3px solid var(--yellow)}
+    .actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.action{background:#eef7f8;border:1px solid var(--line);border-radius:16px;padding:15px;text-decoration:none;color:var(--text)}.action strong{display:block;color:var(--teal-dark);margin-bottom:6px}.action:hover{outline:3px solid var(--yellow)}
     table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden}th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left;font-size:13px;vertical-align:top}th{background:#e8f2f3;color:var(--teal-dark)}
     select,input,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:12px;background:white;margin:6px 0 10px}
     button{border:0;border-radius:12px;padding:12px 14px;font-weight:900;cursor:pointer;background:var(--teal);color:white}button.yellow{background:var(--yellow);color:#233}button.light{background:#e8f2f3;color:var(--teal-dark)}
@@ -190,6 +190,7 @@
       <div class="card">
         <h2>Accès modules TACLAR</h2>
         <div class="actions">
+          <a class="action" href="ancien-client.html"><strong>Client</strong>Créer une demande de course.</a>
           <a class="action" href="ancien-admin.html"><strong>Admin</strong>Suivi global des courses et affectations.</a>
           <a class="action" href="ancien-dispatcher.html"><strong>Dispatcher</strong>Demandes, assignation chauffeur et statut course.</a>
           <a class="action" href="ancien-chauffeur.html"><strong>Chauffeur Course</strong>Connexion chauffeur, disponibilité et courses assignées.</a>
