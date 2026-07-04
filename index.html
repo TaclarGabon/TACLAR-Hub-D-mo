@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TACLAR Suivi — Firebase Test</title>
+  <title>TACLAR Suivi — Formule 1 Firebase V2</title>
 
-  <!-- Firebase compat, compatible avec ton ancien code firebase.initializeApp(...) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
@@ -13,7 +12,7 @@
     :root{
       --teal:#007f86; --teal-dark:#005f66; --yellow:#ffd400; --bg:#f4f7f8;
       --line:#d8e6e8; --text:#102a2e; --muted:#657b80; --card:#fff; --navy:#07142f;
-      --green:#0f8f5f; --red:#b00020;
+      --green:#0f8f5f; --red:#b00020; --soft:#e8f2f3;
     }
     *{box-sizing:border-box}
     body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
@@ -26,8 +25,8 @@
     .pill{border:1px solid rgba(255,255,255,.35);padding:10px 14px;border-radius:999px;font-weight:700;font-size:13px;background:rgba(255,255,255,.12)}
     nav{background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
     .tabs{max-width:1180px;margin:auto;padding:11px 12px;display:flex;gap:10px;overflow:auto;align-items:center}
-    .tab,.linktab{border:0;border-radius:999px;padding:11px 16px;font-weight:800;white-space:nowrap;text-decoration:none;font-size:13px;cursor:pointer}
-    .tab{background:#e8f2f3;color:var(--teal-dark)}.tab.active{background:var(--yellow);color:#253238}.linktab{background:var(--navy);color:white}
+    .tab,.linktab{border:0;border-radius:999px;padding:12px 18px;font-weight:900;white-space:nowrap;text-decoration:none;font-size:14px;cursor:pointer}
+    .tab{background:var(--soft);color:var(--teal-dark)}.tab.active{background:var(--yellow);color:#253238}.linktab{background:var(--navy);color:white}
     main{max-width:1180px;margin:20px auto;padding:0 12px 50px}.view{display:none}.view.active{display:block}
     .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:17px;margin-bottom:14px;box-shadow:0 8px 22px rgba(0,0,0,.04)}
     h2,h3{color:var(--teal-dark);margin:0 0 12px}.notice{background:#fff8d7;border-left:5px solid var(--yellow);border-radius:12px;padding:12px;margin:12px 0;color:#473b00}
@@ -39,15 +38,18 @@
     table{width:100%;border-collapse:collapse;background:white;border-radius:14px;overflow:hidden}th,td{border-bottom:1px solid var(--line);padding:10px;text-align:left;font-size:13px;vertical-align:top}th{background:#e8f2f3;color:var(--teal-dark)}
     select,input,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:12px;background:white;margin:6px 0 10px}
     button{border:0;border-radius:12px;padding:12px 14px;font-weight:900;cursor:pointer;background:var(--teal);color:white}button.yellow{background:var(--yellow);color:#233}button.light{background:#e8f2f3;color:var(--teal-dark)}
-    .badge{padding:5px 8px;border-radius:999px;font-size:12px;font-weight:900;display:inline-block}.b-wait{background:#fff0c8;color:#775000}.b-ok{background:#e8f8ef;color:var(--green)}.b-source{background:#e9f3ff;color:#005b8a}
+    .badge{padding:5px 8px;border-radius:999px;font-size:12px;font-weight:900;display:inline-block}.b-wait{background:#fff0c8;color:#775000}.b-ok{background:#e8f8ef;color:var(--green)}.b-source{background:#e9f3ff;color:#005b8a}.b-live{background:#dcfff0;color:#00623e}
     .small{font-size:12px;color:var(--muted)} pre{white-space:pre-wrap;background:#f7fafb;padding:12px;border-radius:12px;max-height:360px;overflow:auto}
+    .hidden{display:none!important}
+    .toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+    .toolbar > div{min-width:180px;flex:1}
     @media(max-width:850px){.grid,.grid2,.actions{grid-template-columns:1fr 1fr}}@media(max-width:560px){.grid,.grid2,.actions{grid-template-columns:1fr}h1{font-size:24px}}
   </style>
 </head>
 <body>
 <header>
   <div class="wrap top">
-    <div class="brand"><div class="mark">T</div><div><h1>TACLAR SUIVI</h1><p class="sub">Lecture Firebase — recettes, dépenses, preuves et rapports</p></div></div>
+    <div class="brand"><div class="mark">T</div><div><h1>TACLAR SUIVI</h1><p class="sub">Formule 1 — recettes, dépenses, preuves et rapports</p></div></div>
     <div class="pill">Votre confort est notre priorité</div>
   </div>
 </header>
@@ -57,11 +59,7 @@
     <button class="tab active" data-tab="suivi">TACLAR Suivi</button>
     <button class="tab" data-tab="depenses">Dépenses & preuves</button>
     <button class="tab" data-tab="rapport">Rapport</button>
-    <button class="tab" data-tab="firebase">Diagnostic Firebase</button>
-    <a class="linktab" href="ancien-admin.html">Admin</a>
-    <a class="linktab" href="ancien-dispatcher.html">Dispatcher</a>
-    <a class="linktab" href="ancien-chauffeur.html">Chauffeur Course</a>
-    <a class="linktab" href="ancien-direction.html">Direction</a>
+    <button class="tab" data-tab="outils">Outils</button>
   </div>
 </nav>
 
@@ -69,64 +67,147 @@
   <section id="suivi" class="view active">
     <div class="card">
       <h2>TACLAR Suivi — Formule 1</h2>
-      <p>Cette version tente de lire la base Firebase <strong>taclar-52e72</strong>. Elle ne recrée pas les courses : elle essaie de récupérer les courses existantes dans Firestore.</p>
+      <p>
+        Cette page lit directement la collection Firebase <strong>rides</strong> de TACLAR V34.
+        Elle ne crée pas de course. Elle récupère les courses terminées, les chauffeurs et les informations utiles.
+      </p>
       <div id="firebaseStatus" class="notice">Connexion Firebase en cours...</div>
     </div>
 
     <div class="grid">
-      <div class="metric"><div class="label">Recettes consolidées</div><div class="value" id="mTotal">0 FCFA</div></div>
-      <div class="metric"><div class="label">Courses TACLAR</div><div class="value" id="mCourse">0 FCFA</div></div>
-      <div class="metric"><div class="label">Groupage</div><div class="value" id="mGroup">0 FCFA</div></div>
+      <div class="metric"><div class="label">Recettes TACLAR</div><div class="value" id="mCommission">0 FCFA</div></div>
+      <div class="metric"><div class="label">Total payé clients</div><div class="value" id="mPaid">0 FCFA</div></div>
+      <div class="metric"><div class="label">Courses terminées</div><div class="value" id="mCount">0</div></div>
       <div class="metric"><div class="label">Dépenses déclarées</div><div class="value" id="mExpense">0 FCFA</div></div>
     </div>
 
     <div class="card">
-      <h3>Recettes automatiques Firebase</h3>
-      <p class="small">Si la collection utilisée par TACLAR V34 est trouvée, les courses terminées apparaîtront ici.</p>
-      <div id="revenueTable"></div>
+      <h3>Filtres</h3>
+      <div class="toolbar">
+        <div>
+          <label>Chauffeur</label>
+          <select id="filterDriver" onchange="render()"><option value="all">Tous les chauffeurs</option></select>
+        </div>
+        <div>
+          <label>Destination / axe</label>
+          <select id="filterAxis" onchange="render()"><option value="all">Toutes les destinations</option></select>
+        </div>
+        <div>
+          <label>Statut</label>
+          <select id="filterStatus" onchange="render()">
+            <option value="finished">Courses terminées</option>
+            <option value="all">Toutes les courses Firebase</option>
+          </select>
+        </div>
+        <button class="light" onclick="resetFilters()">Réinitialiser</button>
+      </div>
     </div>
 
     <div class="card">
-      <h3>Accès rapide aux vraies interfaces opérationnelles</h3>
-      <div class="actions">
-        <a class="action" href="ancien-admin.html"><strong>Admin</strong>Suivi global des courses et affectations.</a>
-        <a class="action" href="ancien-dispatcher.html"><strong>Dispatcher</strong>Demandes, assignation chauffeur et statut course.</a>
-        <a class="action" href="ancien-chauffeur.html"><strong>Chauffeur Course</strong>Connexion chauffeur, disponibilité et courses assignées.</a>
-        <a class="action" href="ancien-direction.html"><strong>Direction</strong>Vue direction et pilotage.</a>
-      </div>
+      <h3>Recettes automatiques Firebase <span class="badge b-live">live</span></h3>
+      <p class="small">Montant TACLAR = champ <strong>commission</strong>. Le total client = champ <strong>totalPaid/customerPrice</strong>.</p>
+      <div id="revenueTable"></div>
     </div>
   </section>
 
   <section id="depenses" class="view">
-    <div class="card"><h2>Dépenses & preuves</h2><p>La dépense peut être déclarée, mais elle doit être liée à une preuve.</p></div>
+    <div class="card">
+      <h2>Dépenses & preuves</h2>
+      <p>
+        Les champs chauffeur et véhicule sont alimentés par les données récupérées dans Firebase.
+        Si les plaques ne sont pas encore remplies dans TACLAR Course, elles apparaîtront comme “véhicule non renseigné”.
+      </p>
+    </div>
     <div class="grid2">
       <div class="card">
         <h3>Déclarer une dépense test</h3>
-        <label>Véhicule</label><input id="vehicule" value="Toyota Yaris — TCG-001" />
-        <label>Source de l’information</label><select id="source"><option>Chauffeur</option><option>Propriétaire</option><option>Garage</option><option>TACLAR</option></select>
-        <label>Catégorie</label><select id="cat"><option>Carburant</option><option>Lavage</option><option>Vidange</option><option>Mécanique</option><option>Climatisation</option><option>Assurance</option><option>Autre</option></select>
-        <label>Montant FCFA</label><input id="amount" type="number" value="50000" />
-        <label>Preuve / facture</label><input id="proof" value="photo_facture_garage.jpg" />
-        <label>Commentaire</label><textarea id="note" rows="2">Réparation à valider</textarea>
+        <label>Véhicule / plaque</label>
+        <select id="expenseVehicle"></select>
+
+        <label>Source de l’information</label>
+        <select id="expenseSource" onchange="toggleDriverSource()">
+          <option>Chauffeur</option>
+          <option>Propriétaire</option>
+          <option>Garage</option>
+          <option>TACLAR</option>
+        </select>
+
+        <div id="driverSourceBox">
+          <label>Chauffeur concerné</label>
+          <select id="expenseDriver"></select>
+        </div>
+
+        <label>Catégorie</label>
+        <select id="cat">
+          <option>Carburant</option>
+          <option>Lavage</option>
+          <option>Vidange</option>
+          <option>Mécanique</option>
+          <option>Climatisation</option>
+          <option>Assurance</option>
+          <option>Visite technique</option>
+          <option>Autre</option>
+        </select>
+
+        <label>Montant FCFA</label>
+        <input id="amount" type="number" value="50000" />
+
+        <label>Preuve / facture</label>
+        <input id="proof" value="photo_facture_garage.jpg" />
+
+        <label>Commentaire</label>
+        <textarea id="note" rows="2">Réparation à valider</textarea>
+
         <button onclick="addExpense()">Ajouter dépense test</button>
+        <p class="small">Dépense supérieure à 20 000 FCFA : “En attente validation propriétaire”.</p>
       </div>
-      <div class="card"><h3>Liste des dépenses</h3><div id="expenseTable"></div></div>
+
+      <div class="card">
+        <h3>Liste des dépenses</h3>
+        <div id="expenseTable"></div>
+      </div>
     </div>
   </section>
 
   <section id="rapport" class="view">
-    <div class="card"><h2>Rapport propriétaire</h2><div id="report"></div></div>
+    <div class="card">
+      <h2>Rapport propriétaire</h2>
+      <div id="report"></div>
+    </div>
   </section>
 
-  <section id="firebase" class="view">
-    <div class="card">
-      <h2>Diagnostic Firebase</h2>
-      <p>Cette zone montre quelles collections ont répondu. Si aucune collection ne répond, il faudra me donner les noms exacts vus dans le code V34.</p>
-      <button class="yellow" onclick="runFirebaseDiagnostic()">Relancer diagnostic Firebase</button>
+  <section id="outils" class="view">
+    <div id="lockedTools" class="card">
+      <h2>Outils protégés</h2>
+      <p>Cette zone contient le diagnostic Firebase et les accès Admin / Dispatcher / Chauffeur / Direction. Elle est cachée pour garder TACLAR Suivi propre.</p>
+      <label>Mot de passe démo</label>
+      <input id="toolPassword" type="password" placeholder="Mot de passe" />
+      <button class="yellow" onclick="unlockTools()">Ouvrir les outils</button>
+      <p class="small">Mot de passe démo actuel : <strong>taclar2026</strong>. On pourra le changer.</p>
     </div>
-    <div class="grid2">
-      <div class="card"><h3>Collections testées</h3><div id="collectionsTested"></div></div>
-      <div class="card"><h3>Derniers documents bruts</h3><pre id="rawDocs">En attente...</pre></div>
+
+    <div id="toolsContent" class="hidden">
+      <div class="card">
+        <h2>Accès modules TACLAR</h2>
+        <div class="actions">
+          <a class="action" href="ancien-admin.html"><strong>Admin</strong>Suivi global des courses et affectations.</a>
+          <a class="action" href="ancien-dispatcher.html"><strong>Dispatcher</strong>Demandes, assignation chauffeur et statut course.</a>
+          <a class="action" href="ancien-chauffeur.html"><strong>Chauffeur Course</strong>Connexion chauffeur, disponibilité et courses assignées.</a>
+          <a class="action" href="ancien-direction.html"><strong>Direction</strong>Vue direction et pilotage.</a>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <h3>Diagnostic Firebase</h3>
+          <p>Lecture directe de la collection <strong>rides</strong>.</p>
+          <div id="diagnosticTable"></div>
+        </div>
+        <div class="card">
+          <h3>Derniers documents bruts</h3>
+          <pre id="rawDocs">En attente...</pre>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -144,17 +225,10 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  const KEY_EXP = "taclar_suivi_expenses_v3";
+  const KEY_EXP = "taclar_suivi_expenses_v4";
   let expenses = JSON.parse(localStorage.getItem(KEY_EXP) || "[]");
-  let revenues = [];
-  let rawDocs = [];
-  let tested = [];
-
-  // On teste plusieurs noms probables, car il faut identifier celui utilisé par TACLAR V34.
-  const CANDIDATE_COLLECTIONS = [
-    "courses", "demandes", "rides", "trajets", "reservations", "missions", "dispatch", 
-    "requests", "orders", "taclar_courses", "courseRequests"
-  ];
+  let rides = [];
+  let unsubscribe = null;
 
   function money(n){ return Number(n||0).toLocaleString("fr-FR") + " FCFA"; }
   function saveExpenses(){ localStorage.setItem(KEY_EXP, JSON.stringify(expenses)); }
@@ -170,88 +244,177 @@
     });
   });
 
-  function extractAmount(data){
-    const fields = ["prix","price","tarif","fare","montant","amount","total","recette","commission"];
-    for(const f of fields){
-      if(data[f] !== undefined && data[f] !== null && data[f] !== ""){
-        const n = Number(String(data[f]).replace(/[^\d.-]/g,""));
-        if(!isNaN(n)) return n;
-      }
-    }
-    return 0;
+  function localDate(data){
+    if(data.completedAtLocal) return data.completedAtLocal;
+    if(data.createdAtLocal) return data.createdAtLocal;
+    if(data.createdAt && data.createdAt.toDate) return data.createdAt.toDate().toLocaleString("fr-FR");
+    return "";
   }
 
-  function extractStatus(data){
-    return data.statut || data.status || data.etat || data.state || data.courseStatus || "";
-  }
-
-  function isFinished(data){
-    const s = String(extractStatus(data)).toLowerCase();
-    return s.includes("termin") || s.includes("terminee") || s.includes("terminée") || s.includes("completed") || s.includes("done") || s.includes("clot") || s.includes("clôt");
-  }
-
-  function normalizeDoc(collectionName, doc){
+  function normalizeRide(doc){
     const d = doc.data();
-    const amount = extractAmount(d);
-    const status = extractStatus(d);
-    const source = (collectionName.toLowerCase().includes("group")) ? "Groupage" : "Course";
+    const commission = Number(d.commission || 0);
+    const totalPaid = Number(d.totalPaid || d.customerPrice || 0);
+    const status = d.status || "";
+    const driver = d.driverName || d.chauffeur || d.driver || "";
+    const plate = d.driverPlate || "";
+    const car = d.driverCar || "";
+    const vehicle = plate || car || (driver ? "Véhicule non renseigné — " + driver : "Véhicule non renseigné");
     return {
       id: doc.id,
-      source,
-      collection: collectionName,
-      date: d.date || d.createdAt?.toDate?.().toLocaleString("fr-FR") || d.updatedAt?.toDate?.().toLocaleString("fr-FR") || "",
-      driver: d.chauffeur || d.driver || d.driverName || d.nomChauffeur || d.assignedDriver || "",
-      client: d.client || d.clientName || d.nomClient || d.passenger || "",
-      vehicle: d.vehicule || d.vehicle || d.car || d.immatriculation || "",
-      axis: d.trajet || d.axe || d.destination || d.route || d.pickupDestination || "",
-      amount,
+      rideId: d.rideId || doc.id,
+      client: d.clientName || d.client || "",
+      phone: d.clientPhone || "",
+      driver,
+      driverId: d.driverId || "",
+      driverPhone: d.driverPhone || "",
+      vehicle,
+      plate,
+      car,
+      pickup: d.pickupArea || "",
+      landmark: d.pickupLandmark || "",
+      destination: d.destination || d.zoneLabel || "",
+      axis: d.zoneLabel || d.destination || "",
       status,
-      finished: isFinished(d),
+      finished: String(status).toLowerCase().includes("termin"),
+      commission,
+      totalPaid,
+      driverPayout: Number(d.driverPayout || 0),
+      paymentMode: d.paymentMode || "",
+      date: localDate(d),
       raw: d
     };
   }
 
-  async function runFirebaseDiagnostic(){
-    tested = [];
-    rawDocs = [];
-    revenues = [];
-    document.getElementById("firebaseStatus").className = "notice";
-    document.getElementById("firebaseStatus").textContent = "Lecture Firebase en cours...";
-    render();
+  function startRealtime(){
+    const status = document.getElementById("firebaseStatus");
+    status.className = "notice";
+    status.textContent = "Connexion à Firebase collection rides...";
+    try{
+      unsubscribe = db.collection("rides").onSnapshot((snap)=>{
+        rides = [];
+        snap.forEach(doc => rides.push(normalizeRide(doc)));
+        rides.sort((a,b)=>(b.raw.createdAt?.seconds||0)-(a.raw.createdAt?.seconds||0));
+        status.className = "okbox";
+        status.textContent = "Firebase connecté en temps réel : collection rides lue avec succès.";
+        updateDynamicSelects();
+        render();
+      }, (err)=>{
+        status.className = "errbox";
+        status.textContent = "Erreur Firebase : " + err.message;
+        render();
+      });
+    }catch(err){
+      status.className = "errbox";
+      status.textContent = "Erreur Firebase : " + err.message;
+    }
+  }
 
-    for(const name of CANDIDATE_COLLECTIONS){
-      try{
-        const snap = await db.collection(name).limit(20).get();
-        tested.push({collection:name, count:snap.size, ok:true});
-        snap.forEach(doc=>{
-          const normalized = normalizeDoc(name, doc);
-          rawDocs.push(normalized);
-          // Pour le suivi, on affiche seulement celles qui ont un montant OU un statut terminé.
-          if(normalized.amount > 0 || normalized.finished){
-            revenues.push(normalized);
-          }
-        });
-      }catch(err){
-        tested.push({collection:name, count:"Erreur / accès refusé", ok:false, error:err.message});
+  function uniqueBy(arr, keyFn){
+    const map = new Map();
+    arr.forEach(x=>{
+      const k = keyFn(x);
+      if(k && !map.has(k)) map.set(k,x);
+    });
+    return Array.from(map.values());
+  }
+
+  function setOptions(selectId, values, labelFn, allLabel){
+    const sel = document.getElementById(selectId);
+    if(!sel) return;
+    const current = sel.value;
+    sel.innerHTML = "";
+    if(allLabel){
+      const opt = document.createElement("option");
+      opt.value = "all"; opt.textContent = allLabel; sel.appendChild(opt);
+    }
+    values.forEach(v=>{
+      const opt = document.createElement("option");
+      opt.value = labelFn(v);
+      opt.textContent = labelFn(v);
+      sel.appendChild(opt);
+    });
+    if([...sel.options].some(o=>o.value===current)) sel.value = current;
+  }
+
+  function updateDynamicSelects(){
+    const drivers = uniqueBy(rides.filter(r=>r.driver), r=>r.driver);
+    const axes = uniqueBy(rides.filter(r=>r.axis), r=>r.axis);
+    const vehicles = uniqueBy(rides.filter(r=>r.vehicle), r=>r.vehicle);
+
+    setOptions("filterDriver", drivers, r=>r.driver, "Tous les chauffeurs");
+    setOptions("filterAxis", axes, r=>r.axis, "Toutes les destinations");
+
+    const expVeh = document.getElementById("expenseVehicle");
+    if(expVeh){
+      const current = expVeh.value;
+      expVeh.innerHTML = "";
+      vehicles.forEach(v=>{
+        const opt = document.createElement("option");
+        opt.value = v.vehicle;
+        opt.textContent = v.vehicle;
+        expVeh.appendChild(opt);
+      });
+      if(!vehicles.length){
+        const opt = document.createElement("option");
+        opt.value = "Véhicule à renseigner";
+        opt.textContent = "Véhicule à renseigner";
+        expVeh.appendChild(opt);
       }
+      if([...expVeh.options].some(o=>o.value===current)) expVeh.value = current;
     }
 
-    if(revenues.length){
-      document.getElementById("firebaseStatus").className = "okbox";
-      document.getElementById("firebaseStatus").textContent = "Firebase connecté : des documents ont été trouvés. Vérifie si les lignes correspondent aux vraies courses TACLAR V34.";
-    }else{
-      document.getElementById("firebaseStatus").className = "errbox";
-      document.getElementById("firebaseStatus").textContent = "Firebase est chargé, mais aucune course exploitable n’a été trouvée dans les collections testées. Il faut vérifier le nom exact de la collection dans le code V34.";
+    const expDriver = document.getElementById("expenseDriver");
+    if(expDriver){
+      const current = expDriver.value;
+      expDriver.innerHTML = "";
+      drivers.forEach(d=>{
+        const opt = document.createElement("option");
+        opt.value = d.driver;
+        opt.textContent = d.driver;
+        expDriver.appendChild(opt);
+      });
+      if(!drivers.length){
+        const opt = document.createElement("option");
+        opt.value = "Chauffeur à renseigner";
+        opt.textContent = "Chauffeur à renseigner";
+        expDriver.appendChild(opt);
+      }
+      if([...expDriver.options].some(o=>o.value===current)) expDriver.value = current;
     }
+  }
+
+  function filteredRides(){
+    const driver = document.getElementById("filterDriver")?.value || "all";
+    const axis = document.getElementById("filterAxis")?.value || "all";
+    const status = document.getElementById("filterStatus")?.value || "finished";
+    return rides.filter(r =>
+      (driver==="all" || r.driver===driver) &&
+      (axis==="all" || r.axis===axis) &&
+      (status==="all" || r.finished)
+    );
+  }
+
+  function resetFilters(){
+    document.getElementById("filterDriver").value = "all";
+    document.getElementById("filterAxis").value = "all";
+    document.getElementById("filterStatus").value = "finished";
     render();
+  }
+
+  function toggleDriverSource(){
+    const source = document.getElementById("expenseSource").value;
+    document.getElementById("driverSourceBox").classList.toggle("hidden", source !== "Chauffeur");
   }
 
   function addExpense(){
     const amount = Number(document.getElementById("amount").value || 0);
+    const source = document.getElementById("expenseSource").value;
     expenses.unshift({
       date: now(),
-      vehicule: document.getElementById("vehicule").value,
-      source: document.getElementById("source").value,
+      vehicule: document.getElementById("expenseVehicle").value,
+      source,
+      chauffeur: source === "Chauffeur" ? document.getElementById("expenseDriver").value : "",
       cat: document.getElementById("cat").value,
       amount,
       proof: document.getElementById("proof").value,
@@ -262,45 +425,63 @@
     render();
   }
 
+  function unlockTools(){
+    const p = document.getElementById("toolPassword").value;
+    if(p === "taclar2026"){
+      document.getElementById("lockedTools").classList.add("hidden");
+      document.getElementById("toolsContent").classList.remove("hidden");
+      render();
+    }else{
+      alert("Mot de passe incorrect.");
+    }
+  }
+
   function renderTable(rows, headers, fn){
     if(!rows.length) return "<p class='small'>Aucune donnée pour le moment.</p>";
     return "<table><thead><tr>"+headers.map(h=>"<th>"+h+"</th>").join("")+"</tr></thead><tbody>"+rows.map(fn).join("")+"</tbody></table>";
   }
 
   function render(){
-    const total = revenues.reduce((a,b)=>a+Number(b.amount||0),0);
-    const course = revenues.filter(r=>r.source==="Course").reduce((a,b)=>a+Number(b.amount||0),0);
-    const group = revenues.filter(r=>r.source==="Groupage").reduce((a,b)=>a+Number(b.amount||0),0);
+    const list = filteredRides();
+    const commission = list.reduce((a,b)=>a+Number(b.commission||0),0);
+    const totalPaid = list.reduce((a,b)=>a+Number(b.totalPaid||0),0);
     const exp = expenses.reduce((a,b)=>a+Number(b.amount||0),0);
 
-    document.getElementById("mTotal").textContent = money(total);
-    document.getElementById("mCourse").textContent = money(course);
-    document.getElementById("mGroup").textContent = money(group);
+    document.getElementById("mCommission").textContent = money(commission);
+    document.getElementById("mPaid").textContent = money(totalPaid);
+    document.getElementById("mCount").textContent = String(list.length);
     document.getElementById("mExpense").textContent = money(exp);
 
-    document.getElementById("revenueTable").innerHTML = renderTable(revenues, ["Collection","Date","Source","Client","Chauffeur","Véhicule","Trajet / Axe","Statut","Montant"],
-      r=>`<tr><td>${r.collection}</td><td>${r.date}</td><td><span class="badge b-source">${r.source}</span></td><td>${r.client}</td><td>${r.driver}</td><td>${r.vehicle}</td><td>${r.axis}</td><td>${r.status}</td><td><strong>${money(r.amount)}</strong></td></tr>`
+    document.getElementById("revenueTable").innerHTML = renderTable(list, ["Date","Course","Client","Chauffeur","Véhicule","Départ","Destination","Statut","Commission","Total client"],
+      r=>`<tr><td>${r.date}</td><td>${r.rideId}</td><td>${r.client}</td><td>${r.driver}</td><td>${r.vehicle}</td><td>${r.pickup}</td><td>${r.destination}</td><td>${r.status}</td><td><strong>${money(r.commission)}</strong></td><td>${money(r.totalPaid)}</td></tr>`
     );
 
-    document.getElementById("expenseTable").innerHTML = renderTable(expenses, ["Date","Véhicule","Catégorie","Montant","Preuve","Statut"],
-      e=>`<tr><td>${e.date}</td><td>${e.vehicule}</td><td>${e.cat}</td><td><strong>${money(e.amount)}</strong></td><td>${e.proof}</td><td><span class="badge ${e.status.includes("attente")?"b-wait":"b-ok"}">${e.status}</span></td></tr>`
+    document.getElementById("expenseTable").innerHTML = renderTable(expenses, ["Date","Véhicule","Source","Chauffeur","Catégorie","Montant","Preuve","Statut"],
+      e=>`<tr><td>${e.date}</td><td>${e.vehicule}</td><td>${e.source}</td><td>${e.chauffeur||""}</td><td>${e.cat}</td><td><strong>${money(e.amount)}</strong></td><td>${e.proof}</td><td><span class="badge ${e.status.includes("attente")?"b-wait":"b-ok"}">${e.status}</span></td></tr>`
     );
 
     document.getElementById("report").innerHTML = `
-      <p><strong>Recettes automatiques Firebase :</strong> ${money(total)}</p>
+      <p><strong>Recettes TACLAR automatiques :</strong> ${money(commission)}</p>
+      <p><strong>Total payé par les clients :</strong> ${money(totalPaid)}</p>
       <p><strong>Dépenses déclarées :</strong> ${money(exp)}</p>
-      <p><strong>Solde estimé :</strong> ${money(total-exp)}</p>
-      <div class="notice">Si les recettes restent à 0, cela veut dire que le nom de collection ou les champs de l’ancien TACLAR V34 doivent être ajustés.</div>
+      <p><strong>Solde TACLAR estimé après dépenses :</strong> ${money(commission-exp)}</p>
+      <div class="notice">Le rapport utilise les courses terminées de Firebase et les dépenses déclarées dans TACLAR Suivi.</div>
     `;
 
-    document.getElementById("collectionsTested").innerHTML = renderTable(tested, ["Collection","Résultat"],
-      t=>`<tr><td>${t.collection}</td><td>${t.ok ? (t.count + " document(s)") : ("Erreur : " + t.error)}</td></tr>`
-    );
-    document.getElementById("rawDocs").textContent = rawDocs.length ? JSON.stringify(rawDocs.slice(0,10), null, 2) : "Aucun document brut trouvé pour le moment.";
+    const collectionDiag = [{name:"rides", count:rides.length, status:"Lecture temps réel active"}];
+    const diag = document.getElementById("diagnosticTable");
+    if(diag){
+      diag.innerHTML = renderTable(collectionDiag, ["Collection","Documents","Statut"], d=>`<tr><td>${d.name}</td><td>${d.count}</td><td>${d.status}</td></tr>`);
+    }
+    const raw = document.getElementById("rawDocs");
+    if(raw){
+      raw.textContent = JSON.stringify(rides.slice(0,5).map(r=>({id:r.rideId, client:r.client, driver:r.driver, destination:r.destination, commission:r.commission, totalPaid:r.totalPaid, status:r.status, raw:r.raw})), null, 2);
+    }
   }
 
+  toggleDriverSource();
   render();
-  runFirebaseDiagnostic();
+  startRealtime();
 </script>
 </body>
 </html>
