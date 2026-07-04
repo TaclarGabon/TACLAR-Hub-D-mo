@@ -3,227 +3,23 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>TACLAR Hub Démo — Course + Groupage + Suivi</title>
+<title>TACLAR Hub Démo</title>
 <style>
-:root{
-  --teal:#007f8c;
-  --teal-dark:#005965;
-  --yellow:#ffd21f;
-  --white:#ffffff;
-  --bg:#f4f8f9;
-  --text:#193238;
-  --muted:#6b7f85;
-  --danger:#c0392b;
-  --success:#137b47;
-  --orange:#d77b00;
-  --card:#ffffff;
-  --border:#d8e6e8;
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
-header{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:white;padding:22px 18px;border-bottom:5px solid var(--yellow)}
-.logoLine{display:flex;align-items:center;gap:14px;max-width:1200px;margin:auto}
-.logoMark{width:54px;height:54px;border-radius:15px;background:white;display:grid;place-items:center;color:var(--teal);font-weight:900;font-size:26px;box-shadow:0 6px 18px rgba(0,0,0,.18)}
-.logoText h1{margin:0;color:var(--yellow);letter-spacing:1px;font-size:30px;line-height:1}.logoText p{margin:5px 0 0;font-size:14px;opacity:.95}
-.wrap{max-width:1200px;margin:0 auto;padding:18px}.tabs{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 18px}.tab{border:0;border-radius:12px;padding:12px 16px;background:white;color:var(--teal-dark);font-weight:700;cursor:pointer;border:1px solid var(--border)}.tab.active{background:var(--teal);color:white;border-color:var(--teal);box-shadow:0 8px 20px rgba(0,127,140,.18)}
-.panel{display:none}.panel.active{display:block}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;box-shadow:0 4px 12px rgba(0,0,0,.04)}.span4{grid-column:span 4}.span6{grid-column:span 6}.span8{grid-column:span 8}.span12{grid-column:span 12}@media(max-width:800px){.span4,.span6,.span8{grid-column:span 12}.logoText h1{font-size:24px}}
-h2{margin:0 0 12px;color:var(--teal-dark)}h3{margin:0 0 10px;color:var(--teal-dark)}.note{color:var(--muted);font-size:14px;line-height:1.45}.pill{display:inline-block;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:700;background:#e7f4f5;color:var(--teal-dark)}.pill.yellow{background:#fff4ba;color:#6a5600}.pill.green{background:#dff5e9;color:var(--success)}.pill.orange{background:#fff1db;color:var(--orange)}.pill.red{background:#fde5e2;color:var(--danger)}
-label{display:block;font-size:13px;font-weight:700;margin:12px 0 6px}select,input,textarea{width:100%;padding:11px;border:1px solid var(--border);border-radius:10px;background:white;font-size:14px}textarea{min-height:74px;resize:vertical}.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.btn{border:0;border-radius:12px;padding:11px 15px;background:var(--teal);color:white;font-weight:800;cursor:pointer}.btn.secondary{background:var(--yellow);color:#233}.btn.ghost{background:white;color:var(--teal-dark);border:1px solid var(--border)}.btn.danger{background:var(--danger)}.btn:disabled{opacity:.45;cursor:not-allowed}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}}.kpi{background:white;border:1px solid var(--border);border-radius:15px;padding:14px}.kpi b{display:block;color:var(--teal-dark);font-size:24px;margin-top:6px}.kpi span{color:var(--muted);font-size:13px}
-table{width:100%;border-collapse:collapse;overflow:hidden;border-radius:12px;font-size:14px}th,td{padding:11px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}th{background:#eaf6f7;color:var(--teal-dark)}tr:hover td{background:#fbfefe}.empty{padding:18px;color:var(--muted);text-align:center;background:#fbfbfb;border:1px dashed var(--border);border-radius:12px}.small{font-size:12px;color:var(--muted)}.split{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}.alert{padding:12px;border-radius:12px;background:#fff8db;border:1px solid #ffe27a;color:#5d4b00;margin:8px 0}.ok{padding:12px;border-radius:12px;background:#e2f6eb;border:1px solid #bde9cf;color:#0a5d35;margin:8px 0}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:12px}.right{text-align:right}.footerNote{margin-top:18px;padding:12px;border-left:4px solid var(--yellow);background:white;border-radius:10px;color:var(--muted)}
+:root{--teal:#007f86;--teal2:#005c62;--yellow:#ffd400;--bg:#f4f7f8;--line:#d9e4e6;--text:#102a2e;--muted:#64777b;--ok:#0c7a43;--danger:#b00020}*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}header{background:linear-gradient(135deg,var(--teal),var(--teal2));color:#fff;padding:22px 18px;border-bottom:8px solid var(--yellow)}.brand{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}.logo{display:flex;align-items:center;gap:14px}.pin{width:58px;height:58px;border-radius:50%;background:#fff;color:var(--teal);display:grid;place-items:center;font-weight:900;font-size:26px;border:4px solid var(--yellow)}h1{margin:0;font-size:30px;letter-spacing:.5px;color:var(--yellow)}.subtitle{margin:4px 0 0;font-size:14px;color:#e8ffff}.tagline{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);padding:10px 14px;border-radius:14px;font-size:14px}nav{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}.tabs{max-width:1200px;margin:auto;display:flex;gap:8px;padding:10px 12px;overflow:auto}.tab{border:none;background:#e9f2f3;color:var(--teal2);padding:11px 16px;border-radius:999px;font-weight:700;cursor:pointer;white-space:nowrap}.tab.active{background:var(--yellow);color:#253238}main{max-width:1200px;margin:20px auto;padding:0 12px 40px}.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.card,.metric{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 8px 20px rgba(0,0,0,.04);margin-bottom:14px}.metric .label{color:var(--muted);font-size:13px}.metric .value{font-size:25px;font-weight:900;margin-top:6px;color:var(--teal2)}h2,h3{margin:0 0 12px;color:var(--teal2)}label{display:block;font-size:13px;color:var(--muted);margin:10px 0 5px}select,input,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:12px;font-size:14px;background:#fff}.row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.btn{border:none;border-radius:12px;padding:12px 14px;font-weight:800;cursor:pointer;background:var(--teal);color:#fff;margin-top:12px}.btn.yellow{background:var(--yellow);color:#233}.btn.ghost{background:#e9f2f3;color:var(--teal2)}.btn.danger{background:var(--danger)}table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden}th,td{padding:10px;border-bottom:1px solid var(--line);font-size:13px;text-align:left;vertical-align:top}th{background:#e9f2f3;color:var(--teal2)}.badge{display:inline-block;padding:5px 8px;border-radius:999px;font-size:12px;font-weight:800}.course{background:#e5f3ff;color:#005b8a}.groupage{background:#fff4bf;color:#745d00}.ok{background:#e7f6ee;color:var(--ok)}.wait{background:#fff4d8;color:#875a00}.notice{border-left:5px solid var(--yellow);background:#fffbe2;padding:12px;border-radius:12px;margin:12px 0;color:#4c4200}.small{font-size:12px;color:var(--muted)}.actions{display:flex;gap:10px;flex-wrap:wrap}.filters{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.grid2,.row,.filters{grid-template-columns:1fr}}@media(max-width:520px){.grid{grid-template-columns:1fr}h1{font-size:24px}}
 </style>
 </head>
 <body>
-<header>
-  <div class="logoLine">
-    <div class="logoMark">T</div>
-    <div class="logoText">
-      <h1>TACLAR HUB DÉMO</h1>
-      <p>Course + Groupage + Suivi — données partagées</p>
-    </div>
-  </div>
-</header>
-<div class="wrap">
-  <div class="tabs">
-    <button class="tab active" data-panel="course">TACLAR Course</button>
-    <button class="tab" data-panel="groupage">TACLAR Groupage</button>
-    <button class="tab" data-panel="suivi">TACLAR Suivi</button>
-    <button class="tab" data-panel="data">Base commune</button>
-  </div>
-
-  <section id="course" class="panel active">
-    <div class="grid">
-      <div class="card span4">
-        <h2>Course urbaine</h2>
-        <p class="note">Cette partie simule l’interface chauffeur de TACLAR Course. Quand la course est terminée, la recette part automatiquement dans TACLAR Suivi.</p>
-        <label>Chauffeur</label><select id="courseDriver"></select>
-        <label>Véhicule</label><select id="courseVehicle"></select>
-        <label>Axe</label><select id="courseAxis"></select>
-        <label>Nombre de passagers</label><input id="coursePassengers" type="number" min="1" value="1" />
-        <div class="btns">
-          <button class="btn" onclick="startCourse()">Démarrer</button>
-          <button class="btn secondary" onclick="finishCourse()">Fin de course</button>
-        </div>
-        <div id="courseMsg"></div>
-      </div>
-      <div class="card span8">
-        <div class="split"><h2>Historique Course</h2><span class="pill">Source : Course</span></div>
-        <div id="courseTable"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="groupage" class="panel">
-    <div class="grid">
-      <div class="card span4">
-        <h2>Départ groupage</h2>
-        <p class="note">Cette partie simule TACLAR Groupage / Province. La recette est calculée automatiquement selon l’axe et les places réservées.</p>
-        <label>Chauffeur</label><select id="groupDriver"></select>
-        <label>Véhicule</label><select id="groupVehicle"></select>
-        <label>Axe groupage</label><select id="groupAxis"></select>
-        <label>Places réservées</label><input id="groupSeats" type="number" min="1" value="5" />
-        <div class="btns">
-          <button class="btn" onclick="openGroupage()">Ouvrir départ</button>
-          <button class="btn secondary" onclick="closeGroupage()">Clôturer départ</button>
-        </div>
-        <div id="groupMsg"></div>
-      </div>
-      <div class="card span8">
-        <div class="split"><h2>Historique Groupage</h2><span class="pill yellow">Source : Groupage</span></div>
-        <div id="groupTable"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="suivi" class="panel">
-    <div class="grid">
-      <div class="card span12">
-        <div class="split"><div><h2>TACLAR Suivi — Tableau propriétaire</h2><p class="note">Suivi ne recrée pas les axes, chauffeurs ou véhicules. Il lit les données produites par Course et Groupage.</p></div><button class="btn ghost" onclick="renderAll()">Actualiser</button></div>
-        <div class="kpis" id="kpis"></div>
-      </div>
-      <div class="card span4">
-        <h3>Filtres</h3>
-        <label>Source</label><select id="filterSource" onchange="renderSuivi()"><option value="all">Toutes</option><option value="Course">Course</option><option value="Groupage">Groupage</option></select>
-        <label>Chauffeur</label><select id="filterDriver" onchange="renderSuivi()"><option value="all">Tous</option></select>
-        <label>Véhicule</label><select id="filterVehicle" onchange="renderSuivi()"><option value="all">Tous</option></select>
-        <div class="alert"><b>Règle Formule 1</b><br>Recettes automatiques. Dépenses déclarées avec preuve. Propriétaire valide les grosses dépenses.</div>
-      </div>
-      <div class="card span8">
-        <div class="split"><h3>Recettes automatiques consolidées</h3><span class="pill green" id="countOps">0 opérations</span></div>
-        <div id="suiviRevenueTable"></div>
-      </div>
-      <div class="card span6">
-        <h3>Déclarer une dépense avec preuve</h3>
-        <p class="note">La dépense peut venir du chauffeur ou du propriétaire. La preuve/facture reste attachée à la dépense.</p>
-        <label>Véhicule</label><select id="expenseVehicle"></select>
-        <label>Source de l'information</label><select id="expenseSource"><option>Chauffeur</option><option>Propriétaire</option><option>Garage</option><option>TACLAR</option></select>
-        <label>Catégorie</label><select id="expenseCategory"><option>Carburant</option><option>Lavage</option><option>Vidange</option><option>Pneus</option><option>Mécanique</option><option>Climatisation</option><option>Assurance</option><option>Visite technique</option><option>Documents</option><option>Autre</option></select>
-        <label>Montant</label><input id="expenseAmount" type="number" value="50000" min="0" />
-        <label>Référence preuve / facture</label><input id="expenseProof" placeholder="Ex : photo_facture_freins.jpg" />
-        <label>Commentaire</label><textarea id="expenseComment" placeholder="Ex : réparation frein avant, garage PK12"></textarea>
-        <div class="btns"><button class="btn" onclick="addExpense()">Ajouter dépense</button></div>
-        <div id="expenseMsg"></div>
-      </div>
-      <div class="card span6">
-        <h3>Dépenses & documents liés</h3>
-        <div id="expenseTable"></div>
-      </div>
-      <div class="card span12">
-        <h3>Rapport mensuel automatique</h3>
-        <div id="reportBox"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="data" class="panel">
-    <div class="grid">
-      <div class="card span6"><h2>Données communes</h2><p class="note">Ce bloc montre que les mêmes chauffeurs, véhicules et axes sont utilisés par Course, Groupage et Suivi.</p><div id="masterData"></div></div>
-      <div class="card span6"><h2>Outils démo</h2><p class="note">Les données sont stockées dans le navigateur pour cette démo. Dans la vraie application, ce rôle sera joué par Firebase/Supabase.</p><div class="btns"><button class="btn danger" onclick="resetDemo()">Réinitialiser la démo</button><button class="btn ghost" onclick="seedMore()">Ajouter données exemple</button></div><div id="dataMsg"></div></div>
-      <div class="card span12"><h2>Journal technique</h2><div id="techLog"></div></div>
-    </div>
-  </section>
-  <div class="footerNote"><b>Note :</b> ce prototype prouve la logique de connexion. Pour GitHub/Firebase, on gardera Suivi comme module séparé qui lit les données de Course et Groupage dans une base commune.</div>
-</div>
+<header><div class="brand"><div class="logo"><div class="pin">T</div><div><h1>TACLAR HUB DÉMO</h1><p class="subtitle">Course, Groupage et Suivi connectés — version test GitHub</p></div></div><div class="tagline">Votre confort est notre priorité</div></div></header>
+<nav><div class="tabs"><button class="tab active" data-tab="dashboard">Accueil</button><button class="tab" data-tab="course">TACLAR Course</button><button class="tab" data-tab="groupage">TACLAR Groupage</button><button class="tab" data-tab="suivi">TACLAR Suivi</button><button class="tab" data-tab="base">Base commune</button></div></nav>
+<main>
+<section id="dashboard" class="view active"><div class="card"><h2>Principe de la démo</h2><p><strong>Course</strong> et <strong>Groupage</strong> produisent les données. <strong>Suivi</strong> ne recrée rien : il lit les recettes automatiques, les dépenses, les chauffeurs, les véhicules et les axes depuis une base commune simulée.</p><div class="notice">Test : va dans <strong>TACLAR Course</strong>, clique sur <strong>Fin de course</strong>, puis ouvre <strong>TACLAR Suivi</strong>. Fais ensuite pareil avec <strong>TACLAR Groupage</strong>.</div></div><div class="grid" id="dashMetrics"></div><div class="card"><h3>Derniers mouvements</h3><div id="recentEvents"></div></div></section>
+<section id="course" class="view"><div class="grid2"><div class="card"><h2>TACLAR Course</h2><p class="small">Simulation d’une course urbaine terminée. La recette part automatiquement vers TACLAR Suivi.</p><div class="row"><div><label>Chauffeur</label><select id="courseDriver"></select></div><div><label>Véhicule</label><select id="courseVehicle"></select></div></div><label>Axe / trajet</label><select id="courseAxis"></select><div class="row"><div><label>Nombre de passagers</label><input id="coursePassengers" type="number" min="1" value="1" /></div><div><label>Statut</label><input value="Course prête à clôturer" readonly /></div></div><button class="btn yellow" onclick="finishCourse()">Fin de course</button><p class="small">Le chauffeur ne saisit pas la recette manuellement : le montant vient du tarif de l’axe.</p></div><div class="card"><h3>Axes Course disponibles</h3><div id="courseAxesList"></div></div></div></section>
+<section id="groupage" class="view"><div class="grid2"><div class="card"><h2>TACLAR Groupage</h2><p class="small">Simulation d’un départ groupé clôturé. Le total réservation alimente automatiquement TACLAR Suivi.</p><div class="row"><div><label>Chauffeur</label><select id="groupDriver"></select></div><div><label>Véhicule</label><select id="groupVehicle"></select></div></div><label>Axe groupage</label><select id="groupAxis"></select><div class="row"><div><label>Places réservées</label><input id="groupPlaces" type="number" min="1" value="15" /></div><div><label>Frais TACLAR par place</label><input id="groupFee" type="number" min="0" value="1000" /></div></div><button class="btn yellow" onclick="closeGroupage()">Clôturer départ</button><p class="small">Exemple : 15 passagers × 1 000 FCFA = 15 000 FCFA de recette TACLAR.</p></div><div class="card"><h3>Axes Groupage disponibles</h3><div id="groupAxesList"></div></div></div></section>
+<section id="suivi" class="view"><div class="card"><h2>TACLAR Suivi — Formule 1</h2><p>Les recettes sont automatiques. Les dépenses peuvent être déclarées, mais doivent être liées à une preuve/document. Règle : <strong>le chauffeur déclare, le propriétaire valide, TACLAR classe et rapporte.</strong></p></div><div class="grid" id="suiviMetrics"></div><div class="card"><h3>Filtres des recettes automatiques</h3><div class="filters"><select id="filterSource" onchange="renderAll()"><option value="all">Toutes les sources</option><option value="Course">Course</option><option value="Groupage">Groupage</option></select><select id="filterDriver" onchange="renderAll()"></select><select id="filterVehicle" onchange="renderAll()"></select><button class="btn ghost" onclick="resetFilters()">Réinitialiser filtres</button></div><div id="revenueTable"></div></div><div class="grid2"><div class="card"><h3>Déclarer une dépense avec preuve</h3><div class="row"><div><label>Véhicule</label><select id="expenseVehicle"></select></div><div><label>Source de l’info</label><select id="expenseSource"><option>Chauffeur</option><option>Propriétaire</option><option>Garage</option><option>TACLAR</option></select></div></div><div class="row"><div><label>Catégorie</label><select id="expenseCategory"><option>Carburant</option><option>Lavage</option><option>Vidange</option><option>Pneus</option><option>Mécanique</option><option>Climatisation</option><option>Assurance</option><option>Visite technique</option><option>Autre</option></select></div><div><label>Montant FCFA</label><input id="expenseAmount" type="number" min="0" value="50000" /></div></div><label>Preuve / facture</label><input id="expenseProof" type="text" placeholder="Ex : photo_facture_garage.jpg" value="photo_facture_garage.jpg"/><label>Commentaire</label><textarea id="expenseNote" rows="2" placeholder="Ex : réparation freins avant"></textarea><button class="btn" onclick="addExpense()">Ajouter dépense</button><p class="small">Dépense supérieure à 20 000 FCFA : statut automatique “En attente validation propriétaire”.</p></div><div class="card"><h3>Dépenses & documents</h3><div id="expenseTable"></div></div></div><div class="card"><h3>Rapport propriétaire automatique</h3><div id="ownerReport"></div></div></section>
+<section id="base" class="view"><div class="card"><h2>Base commune simulée</h2><p>Cette page montre les données partagées par les modules. Dans la vraie application, cette base sera remplacée par Firebase/Supabase.</p><div class="actions"><button class="btn ghost" onclick="seedDemo()">Réinitialiser avec données démo</button><button class="btn danger" onclick="clearAll()">Effacer les mouvements</button></div></div><div class="grid2"><div class="card"><h3>Chauffeurs</h3><div id="driversList"></div></div><div class="card"><h3>Véhicules</h3><div id="vehiclesList"></div></div></div><div class="card"><h3>Axes</h3><div id="axesList"></div></div><div class="card"><h3>Mouvements enregistrés</h3><pre id="rawData" style="white-space:pre-wrap;background:#f7fafb;padding:12px;border-radius:12px;max-height:380px;overflow:auto"></pre></div></section>
+</main>
 <script>
-const KEY='taclarHubDemoV1';
-const defaultData={
- drivers:[{id:'D1',name:'Rico'},{id:'D2',name:'Patrick'},{id:'D3',name:'Alain'},{id:'D4',name:'Moussa'}],
- vehicles:[{id:'V1',code:'TCG-001',label:'Toyota Yaris — TCG-001',owner:'M. Ondo'},{id:'V2',code:'TCG-002',label:'Hyundai i10 — TCG-002',owner:'Mme Ella'},{id:'V3',code:'TCG-003',label:'Toyota Vitz — TCG-003',owner:'M. Mba'}],
- courseAxes:[{id:'C1',name:'Okala → Aéroport',fare:3000},{id:'C2',name:'Okala → Akanda',fare:2000},{id:'C3',name:'Akanda → Aéroport',fare:2500},{id:'C4',name:'Charbonnages → Owendo direct',fare:2500}],
- groupAxes:[{id:'G1',name:'Libreville → Bitam',reservation:1000},{id:'G2',name:'Libreville → Oyem',reservation:1000},{id:'G3',name:'Charbonnages → Owendo groupage',reservation:1000}],
- operations:[], expenses:[], logs:[]
-};
-let db=load();
-function load(){try{return JSON.parse(localStorage.getItem(KEY))||structuredClone(defaultData)}catch(e){return structuredClone(defaultData)}}
-function save(){localStorage.setItem(KEY,JSON.stringify(db))}
-function money(n){return (Number(n)||0).toLocaleString('fr-FR')+' FCFA'}
-function now(){return new Date().toLocaleString('fr-FR')}
-function addLog(txt){db.logs.unshift({time:now(),txt});db.logs=db.logs.slice(0,30);save()}
-function getBy(arr,id){return arr.find(x=>x.id===id)||{name:'?',label:'?',code:'?'}}
-function fillSelect(id,arr,fn){const el=document.getElementById(id); if(!el)return; el.innerHTML=arr.map(x=>`<option value="${x.id}">${fn?fn(x):x.name}</option>`).join('')}
-function initSelects(){
- ['courseDriver','groupDriver'].forEach(id=>fillSelect(id,db.drivers,x=>x.name));
- ['courseVehicle','groupVehicle','expenseVehicle'].forEach(id=>fillSelect(id,db.vehicles,x=>x.label));
- fillSelect('courseAxis',db.courseAxes,x=>`${x.name} — ${money(x.fare)}`);
- fillSelect('groupAxis',db.groupAxes,x=>`${x.name} — rés. ${money(x.reservation)}/place`);
- const fd=document.getElementById('filterDriver'); fd.innerHTML='<option value="all">Tous</option>'+db.drivers.map(x=>`<option value="${x.id}">${x.name}</option>`).join('');
- const fv=document.getElementById('filterVehicle'); fv.innerHTML='<option value="all">Tous</option>'+db.vehicles.map(x=>`<option value="${x.id}">${x.label}</option>`).join('');
-}
-document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById(b.dataset.panel).classList.add('active');renderAll();}));
-function startCourse(){document.getElementById('courseMsg').innerHTML='<div class="ok">Course démarrée. Le chauffeur utilisera Course, pas Suivi.</div>';}
-function finishCourse(){
- const driverId=courseDriver.value, vehicleId=courseVehicle.value, axisId=courseAxis.value;
- const axis=getBy(db.courseAxes,axisId); const passengers=Math.max(1,Number(coursePassengers.value)||1); const amount=axis.fare*passengers;
- const op={id:'OP'+Date.now(),date:now(),source:'Course',driverId,vehicleId,axis:axis.name,qty:passengers,unit:axis.fare,amount,status:'Terminée'};
- db.operations.unshift(op); addLog(`Course terminée : ${axis.name}, ${money(amount)} envoyés vers Suivi.`); save();
- document.getElementById('courseMsg').innerHTML=`<div class="ok">Fin de course : ${money(amount)} transférés automatiquement vers TACLAR Suivi.</div>`; renderAll();
-}
-function openGroupage(){document.getElementById('groupMsg').innerHTML='<div class="ok">Départ groupage ouvert. Les réservations alimenteront Suivi à la clôture.</div>';}
-function closeGroupage(){
- const driverId=groupDriver.value, vehicleId=groupVehicle.value, axisId=groupAxis.value;
- const axis=getBy(db.groupAxes,axisId); const seats=Math.max(1,Number(groupSeats.value)||1); const amount=axis.reservation*seats;
- const op={id:'OP'+Date.now(),date:now(),source:'Groupage',driverId,vehicleId,axis:axis.name,qty:seats,unit:axis.reservation,amount,status:'Clôturé'};
- db.operations.unshift(op); addLog(`Groupage clôturé : ${axis.name}, ${money(amount)} envoyés vers Suivi.`); save();
- document.getElementById('groupMsg').innerHTML=`<div class="ok">Départ clôturé : ${money(amount)} transférés automatiquement vers TACLAR Suivi.</div>`; renderAll();
-}
-function addExpense(){
- const amount=Number(expenseAmount.value)||0; const vehicleId=expenseVehicle.value; const source=expenseSource.value; const category=expenseCategory.value; const proof=expenseProof.value.trim()||'preuve à joindre'; const comment=expenseComment.value.trim();
- const status=amount>20000?'En attente validation propriétaire':'Déclarée / validée simple';
- db.expenses.unshift({id:'EX'+Date.now(),date:now(),vehicleId,source,category,amount,proof,comment,status});
- addLog(`Dépense ${category} ${money(amount)} ajoutée avec preuve : ${proof}.`); save();
- document.getElementById('expenseMsg').innerHTML=`<div class="ok">Dépense ajoutée. Statut : ${status}.</div>`; renderAll();
-}
-function opRows(ops){if(!ops.length)return '<div class="empty">Aucune donnée pour le moment.</div>';return `<table><thead><tr><th>Date</th><th>Source</th><th>Chauffeur</th><th>Véhicule</th><th>Axe</th><th>Qté</th><th>Montant</th></tr></thead><tbody>${ops.map(o=>`<tr><td>${o.date}</td><td><span class="pill ${o.source==='Groupage'?'yellow':''}">${o.source}</span></td><td>${getBy(db.drivers,o.driverId).name}</td><td>${getBy(db.vehicles,o.vehicleId).code}</td><td>${o.axis}</td><td>${o.qty}</td><td><b>${money(o.amount)}</b></td></tr>`).join('')}</tbody></table>`}
-function renderCourse(){document.getElementById('courseTable').innerHTML=opRows(db.operations.filter(o=>o.source==='Course'))}
-function renderGroup(){document.getElementById('groupTable').innerHTML=opRows(db.operations.filter(o=>o.source==='Groupage'))}
-function filteredOps(){let ops=[...db.operations]; const s=filterSource.value,d=filterDriver.value,v=filterVehicle.value; if(s!=='all')ops=ops.filter(o=>o.source===s); if(d!=='all')ops=ops.filter(o=>o.driverId===d); if(v!=='all')ops=ops.filter(o=>o.vehicleId===v); return ops}
-function renderSuivi(){
- const ops=filteredOps(); const revenue=ops.reduce((a,o)=>a+o.amount,0); const exp=db.expenses.reduce((a,e)=>a+e.amount,0); const net=revenue-exp;
- document.getElementById('kpis').innerHTML=`<div class="kpi"><span>Recettes auto filtrées</span><b>${money(revenue)}</b></div><div class="kpi"><span>Dépenses déclarées</span><b>${money(exp)}</b></div><div class="kpi"><span>Solde estimé</span><b>${money(net)}</b></div><div class="kpi"><span>Opérations filtrées</span><b>${ops.length}</b></div>`;
- document.getElementById('countOps').textContent=ops.length+' opérations'; document.getElementById('suiviRevenueTable').innerHTML=opRows(ops);
- renderExpenses(); renderReport(ops);
-}
-function renderExpenses(){
- const ex=db.expenses; if(!ex.length){expenseTable.innerHTML='<div class="empty">Aucune dépense déclarée.</div>';return}
- expenseTable.innerHTML=`<table><thead><tr><th>Date</th><th>Véhicule</th><th>Catégorie</th><th>Montant</th><th>Source</th><th>Preuve</th><th>Statut</th></tr></thead><tbody>${ex.map(e=>`<tr><td>${e.date}</td><td>${getBy(db.vehicles,e.vehicleId).code}</td><td>${e.category}</td><td><b>${money(e.amount)}</b></td><td>${e.source}</td><td class="small">${e.proof}</td><td><span class="pill ${e.status.includes('attente')?'orange':'green'}">${e.status}</span></td></tr>`).join('')}</tbody></table>`
-}
-function renderReport(ops){
- const byVehicle={}; ops.forEach(o=>{const code=getBy(db.vehicles,o.vehicleId).code; byVehicle[code]=(byVehicle[code]||0)+o.amount});
- const revenue=ops.reduce((a,o)=>a+o.amount,0), expenses=db.expenses.reduce((a,e)=>a+e.amount,0);
- reportBox.innerHTML=`<div class="ok"><b>Rapport TACLAR Suivi — Démo</b><br>Recettes automatiques : <b>${money(revenue)}</b><br>Dépenses déclarées : <b>${money(expenses)}</b><br>Solde estimé : <b>${money(revenue-expenses)}</b><br><br><b>Détail véhicules :</b><br>${Object.entries(byVehicle).map(([k,v])=>`${k} : ${money(v)}`).join('<br>')||'Aucune recette.'}<br><br><span class="small">Les recettes viennent de Course et Groupage. Les dépenses exigent preuve et validation selon le seuil.</span></div>`
-}
-function renderMaster(){
- masterData.innerHTML=`<h3>Chauffeurs</h3>${db.drivers.map(d=>`<span class="pill">${d.name}</span> `).join('')}<h3 style="margin-top:18px">Véhicules</h3>${db.vehicles.map(v=>`<div>${v.code} — ${v.label} — propriétaire : ${v.owner}</div>`).join('')}<h3 style="margin-top:18px">Axes Course</h3>${db.courseAxes.map(a=>`<div>${a.name} — ${money(a.fare)}</div>`).join('')}<h3 style="margin-top:18px">Axes Groupage</h3>${db.groupAxes.map(a=>`<div>${a.name} — réservation ${money(a.reservation)}/place</div>`).join('')}`;
- techLog.innerHTML=db.logs.length?`<table><thead><tr><th>Date</th><th>Action</th></tr></thead><tbody>${db.logs.map(l=>`<tr><td class="small">${l.time}</td><td>${l.txt}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">Aucun événement.</div>';
-}
-function renderAll(){initSelects();renderCourse();renderGroup();renderSuivi();renderMaster()}
-function resetDemo(){localStorage.removeItem(KEY);db=structuredClone(defaultData);addLog('Démo réinitialisée.');save();renderAll();dataMsg.innerHTML='<div class="ok">Démo réinitialisée.</div>'}
-function seedMore(){
- db.operations.unshift({id:'OPseed1'+Date.now(),date:now(),source:'Course',driverId:'D1',vehicleId:'V1',axis:'Okala → Aéroport',qty:1,unit:3000,amount:3000,status:'Terminée'});
- db.operations.unshift({id:'OPseed2'+Date.now(),date:now(),source:'Groupage',driverId:'D1',vehicleId:'V1',axis:'Libreville → Bitam',qty:15,unit:1000,amount:15000,status:'Clôturé'});
- addLog('Données exemple ajoutées : Course + Groupage pour Rico.'); save(); renderAll(); dataMsg.innerHTML='<div class="ok">Données exemple ajoutées.</div>'
-}
-renderAll();
+const KEY="taclar_hub_demo_v1";const base={drivers:[{id:"D001",name:"Rico",phone:"077 00 00 01",status:"Actif"},{id:"D002",name:"Patrick",phone:"077 00 00 02",status:"Actif"},{id:"D003",name:"Alain",phone:"077 00 00 03",status:"Actif"}],vehicles:[{id:"TCG-001",label:"Toyota Yaris — TCG-001",owner:"M. Ondo",status:"Actif"},{id:"TCG-002",label:"Toyota Vitz — TCG-002",owner:"Mme Mba",status:"Actif"},{id:"TCG-003",label:"Hyundai i10 — TCG-003",owner:"M. Essone",status:"Garage"}],axes:[{id:"A001",type:"Course",name:"Okala → Aéroport",fare:3000},{id:"A002",type:"Course",name:"Okala → Akanda",fare:2000},{id:"A003",type:"Course",name:"Akanda → Aéroport",fare:2500},{id:"A004",type:"Course",name:"Charbonnages → Owendo",fare:2500},{id:"G001",type:"Groupage",name:"Libreville → Bitam",fare:1000},{id:"G002",type:"Groupage",name:"Libreville → Oyem",fare:1000},{id:"G003",type:"Groupage",name:"Charbonnages → Owendo direct",fare:1000}],revenues:[],expenses:[],documents:[]};function load(){const s=localStorage.getItem(KEY);if(!s){localStorage.setItem(KEY,JSON.stringify(base));return JSON.parse(JSON.stringify(base))}try{return JSON.parse(s)}catch(e){localStorage.setItem(KEY,JSON.stringify(base));return JSON.parse(JSON.stringify(base))}}function save(d){localStorage.setItem(KEY,JSON.stringify(d))}let db=load();function money(n){return Number(n||0).toLocaleString("fr-FR")+" FCFA"}function nowDate(){return new Date().toLocaleString("fr-FR")}function id(p){return p+"-"+Date.now().toString().slice(-6)}function populateSelect(sel,items,labelFn,allLabel){sel.innerHTML="";if(allLabel){const o=document.createElement("option");o.value="all";o.textContent=allLabel;sel.appendChild(o)}items.forEach(item=>{const o=document.createElement("option");o.value=item.id;o.textContent=labelFn(item);sel.appendChild(o)})}function setup(){populateSelect(courseDriver,db.drivers,d=>d.name);populateSelect(groupDriver,db.drivers,d=>d.name);populateSelect(courseVehicle,db.vehicles,v=>v.label);populateSelect(groupVehicle,db.vehicles,v=>v.label);populateSelect(expenseVehicle,db.vehicles,v=>v.label);populateSelect(courseAxis,db.axes.filter(a=>a.type==="Course"),a=>`${a.name} — ${money(a.fare)}`);populateSelect(groupAxis,db.axes.filter(a=>a.type==="Groupage"),a=>`${a.name} — frais ${money(a.fare)}/place`);populateSelect(filterDriver,db.drivers,d=>d.name,"Tous les chauffeurs");populateSelect(filterVehicle,db.vehicles,v=>v.id,"Tous les véhicules")}document.querySelectorAll(".tab").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));btn.classList.add("active");document.getElementById(btn.dataset.tab).classList.add("active");renderAll()}));function getById(arr,id){return arr.find(x=>x.id===id)}function finishCourse(){const driver=getById(db.drivers,courseDriver.value),vehicle=getById(db.vehicles,courseVehicle.value),axis=getById(db.axes,courseAxis.value),passengers=Number(coursePassengers.value||1),amount=axis.fare*passengers;db.revenues.unshift({id:id("REV"),source:"Course",date:nowDate(),driverId:driver.id,driver:driver.name,vehicleId:vehicle.id,vehicle:vehicle.label,axis:axis.name,passengers,amount,status:"Automatique — Fin de course"});save(db);renderAll();alert(`Course clôturée : ${driver.name} — ${axis.name} — ${money(amount)} envoyés vers TACLAR Suivi.`)}function closeGroupage(){const driver=getById(db.drivers,groupDriver.value),vehicle=getById(db.vehicles,groupVehicle.value),axis=getById(db.axes,groupAxis.value),places=Number(groupPlaces.value||0),fee=Number(groupFee.value||axis.fare||0),amount=places*fee;db.revenues.unshift({id:id("REV"),source:"Groupage",date:nowDate(),driverId:driver.id,driver:driver.name,vehicleId:vehicle.id,vehicle:vehicle.label,axis:axis.name,passengers:places,amount,status:"Automatique — Départ clôturé"});save(db);renderAll();alert(`Départ groupage clôturé : ${driver.name} — ${axis.name} — ${money(amount)} envoyés vers TACLAR Suivi.`)}function addExpense(){const vehicle=getById(db.vehicles,expenseVehicle.value),amount=Number(expenseAmount.value||0),category=expenseCategory.value,source=expenseSource.value,proof=expenseProof.value.trim()||"preuve à fournir",note=expenseNote.value.trim(),status=amount>20000?"En attente validation propriétaire":"Validée",exp={id:id("EXP"),date:nowDate(),vehicleId:vehicle.id,vehicle:vehicle.label,category,amount,source,proof,note,status};db.expenses.unshift(exp);db.documents.unshift({id:id("DOC"),date:nowDate(),title:`Preuve dépense ${category} — ${vehicle.id}`,vehicleId:vehicle.id,linkedExpenseId:exp.id,file:proof,status:"Archivée"});save(db);renderAll();alert(`Dépense enregistrée avec preuve : ${category} — ${money(amount)} — ${status}`)}function filteredRevenues(){const s=filterSource.value,d=filterDriver.value,v=filterVehicle.value;return db.revenues.filter(r=>(s==="all"||r.source===s)&&(d==="all"||r.driverId===d)&&(v==="all"||r.vehicleId===v))}function resetFilters(){filterSource.value="all";filterDriver.value="all";filterVehicle.value="all";renderAll()}function renderMetrics(targetId,revs){const totalRev=revs.reduce((a,b)=>a+Number(b.amount||0),0),totalExp=db.expenses.reduce((a,b)=>a+Number(b.amount||0),0),course=revs.filter(r=>r.source==="Course").reduce((a,b)=>a+Number(b.amount||0),0),group=revs.filter(r=>r.source==="Groupage").reduce((a,b)=>a+Number(b.amount||0),0);document.getElementById(targetId).innerHTML=`<div class="metric"><div class="label">Recettes consolidées</div><div class="value">${money(totalRev)}</div></div><div class="metric"><div class="label">Dont Course</div><div class="value">${money(course)}</div></div><div class="metric"><div class="label">Dont Groupage</div><div class="value">${money(group)}</div></div><div class="metric"><div class="label">Dépenses déclarées</div><div class="value">${money(totalExp)}</div></div>`}function table(rows,headers,renderRow){if(!rows.length)return `<p class="small">Aucune donnée pour le moment.</p>`;return `<table><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows.map(renderRow).join("")}</tbody></table>`}function renderAll(){db=load();renderMetrics("dashMetrics",db.revenues);renderMetrics("suiviMetrics",filteredRevenues());recentEvents.innerHTML=table(db.revenues.slice(0,5),["Date","Source","Chauffeur","Véhicule","Axe","Montant"],r=>`<tr><td>${r.date}</td><td><span class="badge ${r.source==="Course"?"course":"groupage"}">${r.source}</span></td><td>${r.driver}</td><td>${r.vehicleId}</td><td>${r.axis}</td><td><strong>${money(r.amount)}</strong></td></tr>`);revenueTable.innerHTML=table(filteredRevenues(),["Date","Source","Chauffeur","Véhicule","Axe","Passagers","Montant","Statut"],r=>`<tr><td>${r.date}</td><td><span class="badge ${r.source==="Course"?"course":"groupage"}">${r.source}</span></td><td>${r.driver}</td><td>${r.vehicleId}</td><td>${r.axis}</td><td>${r.passengers}</td><td><strong>${money(r.amount)}</strong></td><td>${r.status}</td></tr>`);expenseTable.innerHTML=table(db.expenses,["Date","Véhicule","Catégorie","Montant","Source","Preuve","Statut"],e=>`<tr><td>${e.date}</td><td>${e.vehicleId}</td><td>${e.category}</td><td><strong>${money(e.amount)}</strong></td><td>${e.source}</td><td>${e.proof}</td><td><span class="badge ${e.status.includes("attente")?"wait":"ok"}">${e.status}</span></td></tr>`);const rev=db.revenues.reduce((a,b)=>a+Number(b.amount||0),0),exp=db.expenses.reduce((a,b)=>a+Number(b.amount||0),0);ownerReport.innerHTML=`<div class="notice"><strong>Rapport automatique — TACLAR Suivi</strong><br>Recettes automatiques : <strong>${money(rev)}</strong><br>Dépenses déclarées avec preuves : <strong>${money(exp)}</strong><br>Solde estimé : <strong>${money(rev-exp)}</strong><br><br>Observations : les recettes viennent de Course et Groupage. Les dépenses supérieures à 20 000 FCFA restent en attente de validation propriétaire.</div>`;courseAxesList.innerHTML=table(db.axes.filter(a=>a.type==="Course"),["Axe","Tarif"],a=>`<tr><td>${a.name}</td><td>${money(a.fare)}</td></tr>`);groupAxesList.innerHTML=table(db.axes.filter(a=>a.type==="Groupage"),["Axe","Frais par place"],a=>`<tr><td>${a.name}</td><td>${money(a.fare)}</td></tr>`);driversList.innerHTML=table(db.drivers,["ID","Nom","Téléphone","Statut"],d=>`<tr><td>${d.id}</td><td>${d.name}</td><td>${d.phone}</td><td>${d.status}</td></tr>`);vehiclesList.innerHTML=table(db.vehicles,["Code","Véhicule","Propriétaire","Statut"],v=>`<tr><td>${v.id}</td><td>${v.label}</td><td>${v.owner}</td><td>${v.status}</td></tr>`);axesList.innerHTML=table(db.axes,["ID","Type","Nom","Tarif"],a=>`<tr><td>${a.id}</td><td>${a.type}</td><td>${a.name}</td><td>${money(a.fare)}</td></tr>`);rawData.textContent=JSON.stringify(db,null,2)}function seedDemo(){localStorage.setItem(KEY,JSON.stringify(base));db=load();setup();renderAll();alert("Base démo réinitialisée.")}function clearAll(){if(!confirm("Effacer toutes les recettes et dépenses de test ?"))return;db.revenues=[];db.expenses=[];db.documents=[];save(db);renderAll()}setup();renderAll();
 </script>
 </body>
 </html>
